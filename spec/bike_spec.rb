@@ -13,4 +13,9 @@ describe Bike do
 		# a method "broken?" that should return false
 		expect(bike.broken?).to be_false
 	end
+	it "should be able to break" do
+		bike = Bike.new
+		bike.break
+		expect(bike).to be_broken
+	end
 end

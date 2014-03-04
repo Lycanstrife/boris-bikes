@@ -4,9 +4,12 @@ class Bike
 # you create a new class by typing Bike.new
 
 	def initialize
+
 		# All instance variables begin with @
+
 		# This needs to be an instance variable
 		# because we'll need it in other methods
+		
 		@broken = false
 	end
 

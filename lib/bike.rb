@@ -9,8 +9,8 @@ class Bike
 
 		# This needs to be an instance variable
 		# because we'll need it in other methods
-		
-		@broken = false
+
+		fix
 	end
 
 	def broken?

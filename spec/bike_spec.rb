@@ -1,6 +1,7 @@
 # Link to the Bike class
 require_relative "../lib/bike"
 require_relative "../lib/docking_station"
+require_relative "../lib/bike_container"
 
 # We're describing the functionality
 # of a specific class, Bike

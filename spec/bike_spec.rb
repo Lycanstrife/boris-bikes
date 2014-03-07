@@ -3,6 +3,8 @@ require_relative "../lib/bike"
 require_relative "../lib/docking_station"
 require_relative "../lib/bike_container"
 
+class ContainerHolder; include BikeContainer; end
+
 # We're describing the functionality
 # of a specific class, Bike
 
@@ -31,53 +33,27 @@ describe Bike do
 	end
 end
 
-describe DockingStation do
+describe BikeContainer do
 
 	let(:bike) { Bike.new }
-	let(:station) { DockingStation.new }
-	let(:station) { DockingStation.new(:capacity => 20) }
+	let(:holder) { ContainerHolder.new}
 
 	it "should accept a bike" do
-		bike = Bike.new
-		station = DockingStation.new
-
-		# We expect the station to have 0 bikes
-		expect(station.bike_count).to eq(0)
-
-		# Let's dock a bike into the station
-		station.dock(bike)
-
-		# Now we expect the station to have 1 bike
-		expect(station.bike_count).to eq(1)
+		# We expect the holder to have 0 bikes
+		expect(holder.bike_count).to eq(0)
+		# Let's dock the bike into the holder
+		holder.dock(bike)
+		# Now we expect the holder to have 1 bike
+		expect(holder.bike_count).to eq(1)
 	end
+end
 
-	it "should release a bike" do
-		station.dock(bike)
-		station.release(bike)
-		expect(station.bike_count).to eq(0)
-	end
+describe DockingStation do
 
-	it "should know when it's full" do
-		expect(station).not_to be_full
-		fill_station station
-		expect(station).to be_full
-	end
+	let(:station) { DockingStation.new(:capacity => 20) }
 
-	it "should not accept a bike if it's full" do
-		fill_station station
-		expect(lambda { station.dock(bike) }).to raise_error(RuntimeError)
-	end
-
-	def fill_station(station)
-		20.times { station.dock(Bike.new) }
-	end
-
-	it "should provide the list of available bikes" do
-		working_bike, broken_bike = Bike.new, Bike.new
-		broken_bike.break
-		station.dock(working_bike)
-		station.dock(broken_bike)
-		expect(station.available_bikes).to eq([working_bike])
+	it "should allow setting default capacity on initialising" do
+		expect(station.capacity).to eq(20)
 	end
 
 end
